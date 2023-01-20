@@ -1,6 +1,7 @@
 import plotly.express as px
 import streamlit as st
 import pandas as pd
+import requests
 
 
 
@@ -28,6 +29,13 @@ avg_gas_lw = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/fa
 txs_lw = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/add98081-9147-433f-82be-1cf669e85ce8/data/latest")
 txs_lm = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/eb06b0a8-f8cc-4d84-92ad-4ab199850019/data/latest")
 
+near_ = requests.get("https://api.coingecko.com/api/v3/coins/near").json()
+
+near_price = near_['market_data']['current_price']['usd']
+near_cirs = near_['market_data']['circulating_supply']
+near_mrkcp = near_['market_data']['market_cap']['usd']
+
+
 st.sidebar.header('Parameter')
 st.sidebar.subheader('In this sidebar you can select the timeframe of analysis.')
 timeframe = st.sidebar.selectbox('Timeframe by', ('last 7 days', 'last month')) 
@@ -38,7 +46,7 @@ Keep in mind you can collapse this sidebar, to see wider version of charts.
 
 st.sidebar.markdown('''
 ---
-Created with ❤️ by [Janan](https://twitter.com/0x_janan/) \n
+Created with ❤️ by [Janan](https://twitter.com/0x_janan/) \n [Github](https://github.com/0xjanan/)
 
 Powered by [Flipside](https://flipsidecrypto.xyz) & [MetricsDAO](https://metricsdao.xyz) \n
 
@@ -51,6 +59,12 @@ SQL credit goes to this [Dashboard](https://app.flipsidecrypto.com/dashboard/nea
 
 
 st.title('Near Transparency Report')
+
+u1, u2, u3 = st.columns(3)
+u1.metric("NEAR Price (USD)",near_price)
+u2.metric("NEAR Marketcap (USD)",near_mrkcp)
+u3.metric("NEAR Circulation",round(near_cirs,2))
+
 st.markdown('''
 
 ## Introduction
@@ -66,7 +80,7 @@ One aspect of performance measurement is the number of new and active addresses 
 ---
 New addresses in the NEAR blockchain refer to the number of new wallets or accounts that are created on the network.
 
-''')
+''') 
 
 
 
@@ -316,5 +330,3 @@ Additionally, the number of new contracts, transactions, and new addresses have 
  these metrics suggest that the NEAR blockchain is healthy and growing, with a strong and active community using and contributing to the network.
 
 ''')
-
-st.header('test')
