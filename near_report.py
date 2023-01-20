@@ -6,7 +6,7 @@ import requests
 
 
 
-st.set_page_config(layout='wide', initial_sidebar_state='expanded')
+st.set_page_config(page_title='Near Transparency Report', layout='wide', initial_sidebar_state='expanded')
 
 new_user = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/e184d138-7cc6-4fee-8c03-af478a6855df/data/latest")
 new_user_lm = pd.read_json("https://api.flipsidecrypto.com/api/v2/queries/4b012e94-bda4-4cbe-a612-5275bafbfbfe/data/latest")
@@ -32,7 +32,7 @@ txs_lm = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/eb06b0
 near_ = requests.get("https://api.coingecko.com/api/v3/coins/near").json()
 
 near_price = near_['market_data']['current_price']['usd']
-near_cirs = near_['market_data']['circulating_supply']
+near_cirs = round(near_['market_data']['circulating_supply'],2)
 near_mrkcp = near_['market_data']['market_cap']['usd']
 
 
@@ -62,8 +62,8 @@ st.title('Near Transparency Report')
 
 u1, u2, u3 = st.columns(3)
 u1.metric("NEAR Price (USD)",near_price)
-u2.metric("NEAR Marketcap (USD)",near_mrkcp)
-u3.metric("NEAR Circulation",round(near_cirs,2))
+u2.metric("NEAR Marketcap (USD)",f'{near_mrkcp:,}')
+u3.metric("NEAR Circulation",f'{near_cirs:,}')
 
 st.markdown('''
 
