@@ -46,7 +46,7 @@ Keep in mind you can collapse this sidebar, to see wider version of charts.
 
 st.sidebar.markdown('''
 ---
-Created with ❤️ by [Janan](https://twitter.com/0x_janan/) \n [Github](https://github.com/0xjanan/)
+Created with ❤️ by [Janan](https://twitter.com/0x_janan/) \n in [Github](https://github.com/0xjanan/NEAR-Transparency-R)
 
 Powered by [Flipside](https://flipsidecrypto.xyz) & [MetricsDAO](https://metricsdao.xyz) \n
 
