@@ -34,6 +34,8 @@ near_ = requests.get("https://api.coingecko.com/api/v3/coins/near").json()
 near_price = near_['market_data']['current_price']['usd']
 near_cirs = round(near_['market_data']['circulating_supply'],2)
 near_mrkcp = near_['market_data']['market_cap']['usd']
+p_ch = round(near_['market_data']['price_change_24h'],2)
+m_ch = near_['market_data']['market_cap_change_24h']
 
 
 st.sidebar.header('Parameter')
@@ -65,8 +67,8 @@ st.markdown('''
 ''')
 
 u1, u2, u3 = st.columns(3)
-u1.metric("NEAR Price (USD)",near_price)
-u2.metric("NEAR Marketcap (USD)",f'{near_mrkcp:,}')
+u1.metric("NEAR Price (USD)",near_price, delta=p_ch)
+u2.metric("NEAR Marketcap (USD)",f'{near_mrkcp:,}',delta=m_ch)
 u3.metric("NEAR Circulation",f'{near_cirs:,}')
 
 st.markdown('''
