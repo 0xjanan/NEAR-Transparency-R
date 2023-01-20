@@ -59,6 +59,10 @@ SQL credit goes to this [Dashboard](https://app.flipsidecrypto.com/dashboard/nea
 
 
 st.title('Near Transparency Report')
+st.markdown('''
+---
+## General 
+''')
 
 u1, u2, u3 = st.columns(3)
 u1.metric("NEAR Price (USD)",near_price)
