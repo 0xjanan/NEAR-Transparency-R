@@ -67,8 +67,8 @@ st.markdown('''
 ''')
 
 u1, u2, u3 = st.columns(3)
-u1.metric("NEAR Price (USD)",near_price, delta=p_ch)
-u2.metric("NEAR Marketcap (USD)",f'{near_mrkcp:,}',delta=m_ch)
+u1.metric("NEAR Price (USD)",near_price, delta=f'{p_ch:,}')
+u2.metric("NEAR Marketcap (USD)",f'{near_mrkcp:,}',delta=f'{m_ch:,}')
 u3.metric("NEAR Circulation",f'{near_cirs:,}')
 
 st.markdown('''
