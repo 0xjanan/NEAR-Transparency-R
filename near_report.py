@@ -35,7 +35,7 @@ near_price = near_['market_data']['current_price']['usd']
 near_cirs = round(near_['market_data']['circulating_supply'],2)
 near_mrkcp = near_['market_data']['market_cap']['usd']
 p_ch = round(near_['market_data']['price_change_24h'],2)
-m_ch = near_['market_data']['market_cap_change_24h']
+m_ch = round(near_['market_data']['market_cap_change_24h'],2)
 
 
 st.sidebar.header('Parameter')
