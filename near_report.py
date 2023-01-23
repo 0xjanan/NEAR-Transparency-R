@@ -8,7 +8,7 @@ import requests
 
 st.set_page_config(page_title='Near Transparency Report', layout='wide', initial_sidebar_state='expanded')
 # Data Sources
-@st.cache(ttl=1000, allow_output_mutation=True)
+@st.cache(ttl=86400, allow_output_mutation=True)
 def get_data(query):
     if query == 'New user':
         return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/e184d138-7cc6-4fee-8c03-af478a6855df/data/latest')
