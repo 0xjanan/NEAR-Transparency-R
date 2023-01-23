@@ -7,29 +7,51 @@ import requests
 
 
 st.set_page_config(page_title='Near Transparency Report', layout='wide', initial_sidebar_state='expanded')
+# Data Sources
+@st.cache(ttl=1000, allow_output_mutation=True)
+def get_data(query):
+    if query == 'New user':
+        return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/e184d138-7cc6-4fee-8c03-af478a6855df/data/latest')
+    elif query == 'New user lm':
+        return pd.read_json('https://api.flipsidecrypto.com/api/v2/queries/4b012e94-bda4-4cbe-a612-5275bafbfbfe/data/latest')
+    elif query == 'active lm':
+        return pd.read_json('https://api.flipsidecrypto.com/api/v2/queries/5c7ecdb8-a9b6-4eb6-886b-c84a9a51ad6a/data/latest')
+    elif query == 'active lw':
+        return pd.read_json('https://api.flipsidecrypto.com/api/v2/queries/3eba0bc2-d6bf-4671-818d-4ffe6f4bf9e4/data/latest')
+    elif query == 'cont lm':
+        return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/e4c0eb12-2c75-4d0b-9efc-94901be1903d/data/latest')
+    elif query == 'cont lw':
+        return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/6cf40956-287f-4fa2-b9d4-b82620956c5f/data/latest')
+    elif query == 'act cont lw':
+        return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/3675340b-8710-42da-becc-022ed9bf65ef/data/latest')
+    elif query == 'act cont lm':
+        return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/cdf1e67e-f43c-43a9-af58-894a0136acde/data/latest')
+    elif query == 'gas usd lm':
+        return pd.read_json('https://api.flipsidecrypto.com/api/v2/queries/41c1368c-fd12-490a-840b-2eefa48739f8/data/latest')
+    elif query == 'gas usd lw':
+        return pd.read_json('https://api.flipsidecrypto.com/api/v2/queries/c366b50f-6be8-472f-9de4-79aab2ed0664/data/latest')
+    elif query == 'txs lw':
+        return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/add98081-9147-433f-82be-1cf669e85ce8/data/latest')
+    elif query == 'txs lm':
+        return pd.read_json('https://node-api.flipsidecrypto.com/api/v2/queries/eb06b0a8-f8cc-4d84-92ad-4ab199850019/data/latest')
+    elif query == 'near':
+        return requests.get("https://api.coingecko.com/api/v3/coins/near").json()
+    
+    return None
 
-new_user = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/e184d138-7cc6-4fee-8c03-af478a6855df/data/latest")
-new_user_lm = pd.read_json("https://api.flipsidecrypto.com/api/v2/queries/4b012e94-bda4-4cbe-a612-5275bafbfbfe/data/latest")
-
-active_lm = pd.read_json("https://api.flipsidecrypto.com/api/v2/queries/5c7ecdb8-a9b6-4eb6-886b-c84a9a51ad6a/data/latest")
-active_lw = pd.read_json("https://api.flipsidecrypto.com/api/v2/queries/3eba0bc2-d6bf-4671-818d-4ffe6f4bf9e4/data/latest")
-
-cont_lm = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/e4c0eb12-2c75-4d0b-9efc-94901be1903d/data/latest")
-cont_lw = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/6cf40956-287f-4fa2-b9d4-b82620956c5f/data/latest")
-
-act_cont_lw = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/3675340b-8710-42da-becc-022ed9bf65ef/data/latest")
-act_cont_lm = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/cdf1e67e-f43c-43a9-af58-894a0136acde/data/latest")
-
-gas_usd_lm = pd.read_json("https://api.flipsidecrypto.com/api/v2/queries/41c1368c-fd12-490a-840b-2eefa48739f8/data/latest")
-gas_usd_lw = pd.read_json("https://api.flipsidecrypto.com/api/v2/queries/c366b50f-6be8-472f-9de4-79aab2ed0664/data/latest")
-
-avg_gas_lm = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/452ec00c-0e2b-4139-ba19-079f59028b50/data/latest")
-avg_gas_lw = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/fa7de3ed-eef3-4871-a68e-4b7d9ce03be1/data/latest")
-
-txs_lw = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/add98081-9147-433f-82be-1cf669e85ce8/data/latest")
-txs_lm = pd.read_json("https://node-api.flipsidecrypto.com/api/v2/queries/eb06b0a8-f8cc-4d84-92ad-4ab199850019/data/latest")
-
-near_ = requests.get("https://api.coingecko.com/api/v3/coins/near").json()
+new_user = get_data('New user')
+new_user_lm = get_data('New user lm')
+active_lm = get_data('active lm')
+active_lw = get_data('active lw')
+cont_lm = get_data('cont lm')
+cont_lw = get_data('cont lw')
+act_cont_lw = get_data('act cont lw')
+act_cont_lm = get_data('act cont lm')
+gas_usd_lm = get_data('gas usd lm')
+gas_usd_lw = get_data('gas usd lw')
+txs_lw = get_data('txs lw')
+txs_lm = get_data('txs lm')
+near_ = get_data('near')
 
 near_price = near_['market_data']['current_price']['usd']
 near_cirs = round(near_['market_data']['circulating_supply'],2)
