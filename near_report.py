@@ -76,6 +76,7 @@ Powered by [Flipside](https://flipsidecrypto.xyz) & [MetricsDAO](https://metrics
 
 
 SQL credit goes to this [Dashboard](https://app.flipsidecrypto.com/dashboard/near-transparency-report-12-15-fxcrlG) Brian 👌 \n
+[SQL](https://github.com/0xjanan/NEAR-Transparency-R/blob/main/SQLs.txt)
 
 ''')
 
