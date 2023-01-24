@@ -1,5 +1,5 @@
 --- CREDIT GOES TO BRIAN  
-[link](https://next.flipsidecrypto.xyz/edit/queries/1f862ca0-6bd8-4d5d-b892-325d965256eb) \n
+[link](https://next.flipsidecrypto.xyz/edit/queries/c3937636-9d14-4289-abc9-b1571bcc5100) 
 ### TRANSACTIONS SQL
 WITH
   swaps AS (
